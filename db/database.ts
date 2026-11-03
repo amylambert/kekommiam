@@ -1,17 +1,12 @@
 import * as SQLite from "expo-sqlite";
 
-/**
- * Opens and initializes the local SQLite database for the meal planner.
- * Uses the modern asynchronous SQLite API provided by Expo.
- */
 export async function initializeDatabase(): Promise<SQLite.SQLiteDatabase> {
-  // Opens a local database file named 'kekommiam.db' on the device
-  const db = await SQLite.openDatabaseAsync("kekommiam.db");
 
-  // Enable foreign key constraints in SQLite (disabled by default)
+const db = await SQLite.openDatabaseAsync("kekommiam.db");
+
+  // Enable foreign key constraints in SQLite
   await db.execAsync("PRAGMA foreign_keys = ON;");
 
-  // Run table creation migrations
   await db.execAsync(`
     -- 1. Categories Table
     CREATE TABLE IF NOT EXISTS categories (
